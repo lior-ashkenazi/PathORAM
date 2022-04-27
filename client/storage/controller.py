@@ -2,7 +2,6 @@ import os
 import math
 
 import client.config as config
-import client.storage.utils as utils
 import client.log as log
 from client.storage.file_processor import FileProcessor
 from client.storage.data_file_map import DataFileMap

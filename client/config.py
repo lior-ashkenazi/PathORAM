@@ -1,5 +1,4 @@
 import math
-from enum import Enum
 import random
 
 # Block size of the chunk files in terms of bytes

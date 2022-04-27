@@ -7,7 +7,7 @@ from client.crypto import utils
 from client.crypto.key_map import KeyMap
 
 from client.crypto.exceptions import WrongPassword
-from client.storage.exceptions import FullStorage, DownloadFileError, FileSizeError
+from client.storage.exceptions import FullStorage
 
 AES_CRYPTO = None
 
