@@ -10,12 +10,19 @@ JSON_WRAPPED_MAC_KEY = "wrapped_mac_key"
 
 
 class KeyMap:
+    """
+    A map for the cryptographic Keys
+    """
     def __init__(self, salt, wrapped_aes_key, wrapped_mac_key):
         self.salt = salt
         self.wrapped_aes_key = wrapped_aes_key
         self.wrapped_mac_key = wrapped_mac_key
 
     def save_to_file(self):
+        """
+        Saves the KeyMap on disk
+        :return:
+        """
         with data.open_data_file(utils.KEY_MAP_FILE_NAME, utils.WRITE_MODE) as key_map:
             salt = utils.byte_to_str(self.salt)
             wrapped_aes_key = utils.byte_to_str(self.wrapped_aes_key)
@@ -26,6 +33,10 @@ class KeyMap:
 
     @classmethod
     def load_from_file(cls):
+        """
+        Loads the KeyMap
+        :return: a KeyMap object
+        """
         with data.open_data_file(utils.KEY_MAP_FILE_NAME, utils.READ_MODE) as key_map:
             try:
                 json_key_map = json.load(key_map)
@@ -39,6 +50,10 @@ class KeyMap:
 
     @classmethod
     def verify_content(cls):
+        """
+        Try to load successfully the KeyMap file. If done successfully, returns True, else False
+        :return: a boolean
+        """
         try:
             cls.load_from_file()
             return True

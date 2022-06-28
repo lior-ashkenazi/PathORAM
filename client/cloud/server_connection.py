@@ -2,7 +2,6 @@ import socket
 import tqdm
 import os
 import time
-from subprocess import call
 
 import client.data as data
 import client.cloud.utils as utils
@@ -17,12 +16,6 @@ def socket_connect():
     port = 1234
     s = socket.socket()
     s.connect((ip, port))
-
-
-def call_server():
-    server_path = "server" + os.sep + "server.py"
-    server_file = os.path.join(CLIENT_DIR, server_path)
-    call(['python3', server_file])
 
 
 def file_upload(content, filename):
@@ -58,7 +51,7 @@ def file_download(filename):
     filename = os.path.basename(filename)
     upload_bar = tqdm.tqdm(range(int(size)), f"Receiving {filename}", unit="B", unit_scale=True,
                            unit_divisor=1024)
-    tmp_filename = os.path.join(CLIENT_DIR,'tmp')
+    tmp_filename = os.path.join(CLIENT_DIR, 'tmp')
     f = open(tmp_filename, 'wb')
     while True:
         data = s.recv(4096)

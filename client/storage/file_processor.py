@@ -11,11 +11,21 @@ PADDING = b'0'
 
 
 class FileProcessor:
+    """
+    Responsible for processing file inputs
+    """
     def __init__(self, aes_crypto=None):
         self.aes_crypto = aes_crypto
         self.data_id_counter = DataFileMap().get_id_counter()
 
     def split(self, file_name, file_input):
+        """
+        Given a file, this method splits it to "chunks" which are called data files, each in a
+        fixed size
+        :param file_name: a file name
+        :param file_input: the file's data
+        :return:
+        """
         logger.info(f"LENGTH OF THE SELECTED FILE {len(file_input)}")
         data_ids = []
         for buffer in range(0, len(file_input), config.BLOCK_SIZE):
@@ -37,6 +47,12 @@ class FileProcessor:
         DataFileMap().add_data_file(file_name, len(file_input), data_ids, self.data_id_counter)
 
     def join(self, data_blocks, expected_file_len):
+        """
+        Joins data blocks (equivalent to data files) into a file, restoring it
+        :param data_blocks: data blocks
+        :param expected_file_len: the expected size of the data
+        :return:
+        """
         plaintext = bytearray()
         for pos, data_block in enumerate(data_blocks):
             logger.info(f"JOINING DATA BLOCK WITH ID {data_block[0]}")

@@ -27,6 +27,7 @@ COMMANDS = {"upload", "download", "delete"}
 
 COMMAND_LINE_LENGTH = 2
 
+
 def run():
     if not handler.has_signed_up():
         print(SIGNUP_MSG)
